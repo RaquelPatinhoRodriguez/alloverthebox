@@ -10,4 +10,4 @@
 ## 🤝 **Conéctate conmigo**  
 
 📧 **Email**: `alloverthebox@outlook.es`  
-💼 **LinkedIn**: [Perfil](www.linkedin.com/in/raquel-patiño-rodríguez-7460aa248)
+💼 **LinkedIn**: [Raquel Patiño Rodríguez](https://www.linkedin.com/in/raquel-pati%C3%B1o-rodr%C3%ADguez-7460aa248/)
