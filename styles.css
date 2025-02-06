@@ -19,6 +19,9 @@ body {
     z-index: 10;
     height: 60px; /* Altura fija para el footer */
     margin-top: auto; /* Empuja el footer al fondo */
+    flex-shrink: 0;
+    left: 0;
+    bottom: 0;
 }
 
 .social-links {
@@ -206,4 +209,93 @@ body {
 .bottom {
     border-radius: 15px;
     margin: 25px auto;
+}
+
+/* Estilos para about-me */
+.console-page {
+    font-family: "Courier New", monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 76px 0 0; /* Quitado el padding lateral */
+    transition: background 0.3s, color 0.3s;
+    box-sizing: border-box;
+}
+
+.console-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px; /* Movido el padding aquí */
+}
+
+#footer-placeholder {
+    width: 100%;
+    margin-top: auto;
+}
+
+.console {
+    padding: 15px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    min-height: 300px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #33ff33;
+}
+
+.dark-mode .console {
+    background-color: black;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.light-mode {
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+.light-mode .console {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-theme {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.dark-mode .toggle-theme {
+    background: #33ff33;
+    color: #121212;
+}
+
+.light-mode .toggle-theme {
+    background: #222;
+    color: #fff;
+}
+
+.line {
+    opacity: 0;
+    white-space: pre-line;
+    transition: opacity 0.3s;
+}
+
+.blinking {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
