@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     loadNavbar();
+    loadFooter();
     AOS.init();
 });
 
@@ -32,5 +33,15 @@ async function loadNavbar() {
         }
     } catch (error) {
         console.error('Error loading navbar:', error);
+    }
+}
+
+async function loadFooter() {
+    try {
+        const response = await fetch('components/footer.html');
+        const data = await response.text();
+        document.getElementById('footer-placeholder').innerHTML = data;
+    } catch (error) {
+        console.error('Error loading footer:', error);
     }
 }
