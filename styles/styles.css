@@ -1,45 +1,47 @@
 :root {
     /* Colores */
-    --primary-gradient: linear-gradient(90deg, #4424D6, #8803A9);
-    --background-gradient: linear-gradient(45deg, #6b48ff, #48a9fe);
-    --accent-gradient: linear-gradient(135deg, #6b48ff 0%, #48a9fe 100%);
-    --text-light: white;
-    --text-dark: black;
-    --footer-bg: black;
-    --hover-color: #48a9fe;
+    --gradient-primary: linear-gradient(90deg, #4424D6, #8803A9);
+    --gradient-background: linear-gradient(45deg, #6b48ff, #48a9fe);
+    --gradient-accent: linear-gradient(90deg, #4424D6, #8803A9, #E5007D);
     
-    /* Dimensiones */
-    --navbar-height: 76px;
-    --footer-height: 80px;
-    --content-height: calc(100vh - (var(--navbar-height) + var(--footer-height)));
-    --card-width: 18rem;
+    /* Colores sólidos */
+    --color-white: #fff;
+    --color-black: #000;
+    --color-dark: #121212;
+    --color-light: #f4f4f4;
+    --color-primary: #4B70F5;
+    --color-console: #33ff33;
     
-    /* Espaciados */
-    --section-padding: 2rem;
-    --card-padding: 1.5rem;
-    --icon-gap: 2.5rem;
+    /* Espaciado */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
     
     /* Bordes */
-    --border-radius: 15px;
     --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 15px;
     
     /* Sombras */
-    --card-shadow: 5px 5px 15px rgba(107, 72, 255, 0.2),
-                   -5px -5px 15px rgba(72, 169, 254, 0.2);
+    --shadow-card: 5px 5px 15px rgba(107, 72, 255, 0.2),
+                  -5px -5px 15px rgba(72, 169, 254, 0.2);
+    --shadow-console: 0 0 10px rgba(0, 255, 0, 0.5);
     
-    /* Fuentes */
-    --font-size-base: 1.1rem;
-    --font-size-large: 1.8rem;
-    --font-size-title: 3rem;
-    --line-height-base: 1.8;
+    /* Alturas fijas */
+    --navbar-height: 76px;
+    --footer-height: 80px;
+    --content-min-height: calc(100vh - (var(--navbar-height) + var(--footer-height)));
     
-    /* Animaciones */
-    --transition-speed: 0.3s;
-    --animation-duration: 4s;
+    /* Dimensiones */
+    --project-card-width: 18rem;
+    --project-card-height: 21.6rem;
+    --escapable-card-height: 12.6rem;
 }
 
 body {
-    background: var(--background-gradient);
+    background: var(--gradient-background);
     min-height: 100vh;
     margin: 0;
     display: flex;
@@ -47,18 +49,18 @@ body {
 }
 
 .home-page {
-    background: var(--background-gradient);
+    background: var(--gradient-background);
     overflow: hidden;
 }
 /*footer*/
 .footer {
-    background-color: var(--footer-bg);
-    padding: 1.5rem 0;
+    background-color: var(--color-black);
+    padding: var(--spacing-lg) 0;
     position: relative;
     width: 100%;
     z-index: 10;
-    height: var(--footer-height);
-    margin-top: auto;
+    height: var(--footer-height); /* Aumentada la altura del footer */
+    margin-top: auto; /* Empuja el footer al fondo */
     flex-shrink: 0;
     left: 0;
     bottom: 0;
@@ -67,28 +69,28 @@ body {
 .social-links {
     display: flex;
     justify-content: center;
-    gap: var(--icon-gap);
+    gap: 2.5rem; /* Aumentado el espacio entre iconos */
 }
 
 .social-links a {
-    color: var(--text-light);
-    font-size: var(--font-size-large);
-    transition: color var(--transition-speed) ease;
+    color: var(--color-white);
+    font-size: 1.8rem; /* Aumentado el tamaño de los iconos */
+    transition: color 0.3s ease;
 }
 
 .social-links a:hover {
-    color: var(--hover-color);
+    color: #48a9fe;
 }
 
 /* Estilos específicos para about-box */
 .about-page {
-    background: white;
+    background: var(--color-white);
     overflow-x: hidden; /* Solo prevenir scroll horizontal */
     overflow-y: auto; /* Permitir scroll vertical */
 }
 
 .main-content {
-    color: black;
+    color: var(--color-black);
     font-family: 'Verdana', sans-serif;
     font-size: 1.1rem;
     line-height: 1.8;
@@ -109,7 +111,7 @@ body {
     animation: float 8s infinite;
 }
 .content-wrapper {
-    min-height: var(--content-height);
+    min-height: var(--content-min-height); /* 76px navbar + 80px footer */
     display: flex;
     align-items: center;
     position: relative;
@@ -126,12 +128,17 @@ body {
 
 /* animacion logo */
 .cubo {
-    --clr-cube: var(--text-light);
+    --clr-1: var(--color-white);
+    --clr-2: var(--color-white);
+    --clr-3: var(--color-white);
+    --clr-4: var(--color-white);
+    --clr-5: var(--color-white);
+    --clr-6: var(--color-white);
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;
-    animation: giratorio var(--animation-duration) infinite linear;
-    color: var(--text-light);
+    animation: giratorio 4s infinite linear;
+    color: var(--color-white);
 }
 
 .lado {
@@ -139,25 +146,56 @@ body {
     height: 100%;
     position: absolute;
     transform-style: preserve-3d;
-    border: 1px solid var(--clr-cube);
 }
 
-.lado:nth-child(1) { transform: translateZ(-50px) rotateY(180deg); }
-.lado:nth-child(2) { transform: rotateY(-270deg) translateX(50%); transform-origin: top right; }
-.lado:nth-child(3) { transform: rotateY(270deg) translateX(-50%); transform-origin: center left; }
-.lado:nth-child(4) { transform: rotateX(90deg) translateY(-50%); transform-origin: top center; }
-.lado:nth-child(5) { transform: rotateX(-90deg) translateY(50%); transform-origin: bottom center; }
-.lado:nth-child(6) { transform: translateZ(50px); }
+.lado:nth-child(1) {
+    border: 1px solid var(--clr-1);
+    transform: translateZ(-50px) rotateY(180deg);
+}
+
+.lado:nth-child(2) {
+    border: 1px solid var(--clr-2);
+    transform: rotateY(-270deg) translateX(50%);
+    transform-origin: top right;
+}
+
+.lado:nth-child(3) {
+    border: 1px solid var(--clr-3);
+    transform: rotateY(270deg) translateX(-50%);
+    transform-origin: center left;
+}
+
+.lado:nth-child(4) {
+    border: 1px solid var(--clr-4);
+    transform: rotateX(90deg) translateY(-50%);
+    transform-origin: top center;
+}
+
+.lado:nth-child(5) {
+    border: 1px solid var(--clr-5);
+    transform: rotateX(-90deg) translateY(50%);
+    transform-origin: bottom center;
+}
+
+.lado:nth-child(6) {
+    border: 1px solid var(--clr-6);
+    transform: translateZ(50px);
+}
 
 @keyframes giratorio {
-    0% { transform: rotateX(0deg) rotateY(0deg); }
-    100% { transform: rotateX(360deg) rotateY(360deg); }
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
 }
 
 /* Estilos about-box */
 .title {
     font-family: 'Poppins', sans-serif;
-    color: #4B70F5;
+    color: var(--color-primary);
     font-weight: 600;
     position: relative;
     left: 50%;
@@ -171,11 +209,9 @@ body {
     position: relative;
 }
 
-
-
 /* Estilos about-box */
 .about-section {
-    padding: var(--section-padding) 0;
+    padding: var(--spacing-xl) 0;
     position: relative;
     width: 100%;
     display: flex;
@@ -185,19 +221,19 @@ body {
 }
 
 .about-section:nth-child(even) {
-    background: var(--primary-gradient);
-    color: var(--text-light);
+    background: var(--gradient-primary);
+    color: var(--color-white);
 }
 
 .about-section:nth-child(odd) {
-    background: var(--text-light);
-    color: var(--text-dark);
+    background: var(--color-white);
+    color: #333;
 }
 
 .about-content {
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--spacing-lg);
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.5s ease-out;
@@ -220,21 +256,21 @@ body {
 
 .about-title {
     font-family: 'Poppins', sans-serif;
-    color: #4B70F5;
+    color: var(--color-primary);
     font-weight: 600;
     text-align: center;
-    margin: 2rem;
+    margin: var(--spacing-lg);
     font-size: 3rem;
     padding: 7rem 0 0 ;
 }
 
-/* 7. Estilos de la consola */
+/* Estilos para about-me */
 .console-page {
     font-family: "Courier New", monospace;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 76px 0 0; /* Quitado el padding lateral */
+    padding: var(--navbar-height) 0 0; /* Quitado el padding lateral */
     transition: background 0.3s, color 0.3s;
     box-sizing: border-box;
 }
@@ -258,27 +294,27 @@ body {
     width: 90%;
     max-width: 500px;
     min-height: 300px;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    box-shadow: var(--shadow-console);
     transition: background 0.3s, box-shadow 0.3s;
 }
 
 .dark-mode {
-    background-color: #121212;
-    color: #33ff33;
+    background-color: var(--color-dark);
+    color: var(--color-console);
 }
 
 .dark-mode .console {
-    background-color: black;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    background-color: var(--color-black);
+    box-shadow: var(--shadow-console);
 }
 
 .light-mode {
-    background-color: #f4f4f4;
+    background-color: var(--color-light);
     color: #222;
 }
 
 .light-mode .console {
-    background-color: #fff;
+    background-color: var(--color-white);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -294,13 +330,13 @@ body {
 }
 
 .dark-mode .toggle-theme {
-    background: #33ff33;
-    color: #121212;
+    background: var(--color-console);
+    color: var(--color-dark);
 }
 
 .light-mode .toggle-theme {
     background: #222;
-    color: #fff;
+    color: var(--color-white);
 }
 
 .line {
@@ -317,50 +353,12 @@ body {
     50% { opacity: 0; }
 }
 
-/* Eliminar duplicación en project-body */
-.project-body {
-    background: var(--primary-gradient);
-    color: var(--text-light);
-    height: 100%;
-    border-radius: var(--border-radius);
-    padding: var(--card-padding);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-/* Eliminar las definiciones duplicadas y mantener solo las diferencias */
-.project-flip-front .project-body {
-    margin: 1rem;
-    height: auto;
-}
-
-/* Consolidar estilos de tech-stack */
-.project-tech-stack {
-    width: 80%;
-    margin: 1rem 0;
-    padding: 0;
-    list-style: none;
-}
-
-.project-tech-stack li {
-    background: var(--primary-gradient);
-    color: var(--text-light);
-    padding: 0.5rem 0.75rem;
-    margin: 0.5rem 0;
-    border-radius: var(--border-radius-sm);
-    font-size: 0.9rem;
-    text-align: center;
-}
-
 /* Estilos para la sección de proyectos */
 .projects-container {
     position: relative;
-    min-height: calc(100vh - 156px); /* 76px navbar + 80px footer */
-    margin-top: 76px; /* altura del navbar */
-    padding: 2rem;
+    min-height: var(--content-min-height); /* 76px navbar + 80px footer */
+    margin-top: var(--navbar-height); /* altura del navbar */
+    padding: var(--spacing-lg);
     overflow-x: hidden;
     margin-bottom: 0; /* Eliminamos el margen inferior */
     display: flex;
@@ -368,18 +366,18 @@ body {
 }
 
 .project-card {
-    width: var(--card-width);
+    width: var(--project-card-width);
     position: absolute;
-    transition: all var(--transition-speed) ease;
+    transition: all 0.3s ease;
 }
 
 /* Tarjeta fija con efecto flip */
 .fixed-project {
     position: absolute;
-    top: 2rem; /* Ajustado desde el inicio del container */
-    left: 1.25rem;
+    top: var(--spacing-xl); /* Ajustado desde el inicio del container */
+    left: var(--spacing-md);
     perspective: 1000px;
-    height: 21.6rem;
+    height: var(--project-card-height);
 }
 
 .project-flip-inner {
@@ -391,15 +389,7 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Mantener el hover para desktop */
-@media (hover: hover) {
-    .fixed-project:hover .project-flip-inner {
-        transform: rotateY(180deg);
-    }
-}
-
-/* Añadir clase para el flip en móvil */
-.fixed-project .project-flip-inner.flipped {
+.fixed-project:hover .project-flip-inner {
     transform: rotateY(180deg);
 }
 
@@ -420,38 +410,43 @@ body {
     background-color: #f8f9fa;
 }
 
-/* Mantener el hover solo para desktop */
-@media (hover: hover) {
-    .escapable-project:hover {
-        cursor: pointer;
-    }
-}
-
-/* Estilo para indicar que es interactivo en móvil */
+/* Tarjetas escapables */
 .escapable-project {
     position: absolute;
     cursor: pointer;
-    height: 12.6rem;
-    -webkit-tap-highlight-color: transparent; /* Elimina el highlight al tocar en móvil */
+    height: var(--escapable-card-height);
 }
 
 /* Estilos de las tarjetas */
 .project-item {
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow-card);
     width: 100%;
     height: 100%;
-    border-radius: var(--border-radius);
-    background: transparent;
+    border-radius: var(--border-radius-lg);
+    background: transparent; /* Cambiado de white a transparent */
+}
+
+/* Estilo base para todos los project-body */
+.project-body {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    height: 100%;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 /* Estilo para el frente y tarjetas escapables */
 .project-flip-front .project-body,
 .escapable-project .project-body {
-    background: var(--primary-gradient);
-    color: var(--text-light);
+    background: var(--gradient-primary);
+    color: var(--color-white);
     height: 100%;
-    border-radius: var(--border-radius);
-    padding: var(--card-padding);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -460,84 +455,135 @@ body {
 
 /* Estilo específico para la parte trasera */
 .project-flip-back .project-body {
-    background: white;
-    color: black;
+    background: var(--color-white);
+    color: var(--color-black);
+    height: 100%;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
+}
+
+.project-flip-back .card-title {
+    color: var(--color-black);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-md);
 }
 
 .project-flip-back .project-tech-stack {
     width: 80%;
-    margin: 1rem auto;
+    margin: var(--spacing-md) auto;
     flex: 1;
+}
+
+.project-flip-back .project-tech-stack li {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 .project-flip-back .project-btn {
     width: 80%;
-    margin: 1rem auto 0;
+    margin: var(--spacing-md) auto 0;
+}
+
+.project-flip-back .project-btn a {
+    background: var(--gradient-accent);
+    color: var(--color-white);
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    transition: transform 0.3s ease;
 }
 
 /* Estilos para la parte trasera */
 .back-content {
-    background: white;
-    color: black;
+    background: var(--color-white);
+    color: var(--color-black);
     height: 100%;
-    border-radius: var(--border-radius);
-    padding: var(--card-padding);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .back-content .card-title {
-    color: black;
+    color: var(--color-black);
     font-size: 1.2rem;
     font-weight: bold;
-    margin: 0.5rem 0;
+    margin: var(--spacing-sm) 0;
     text-align: center;
 }
 
 .back-content .project-tech-stack {
     width: 80%;
-    margin: 0.5rem auto;
+    margin: var(--spacing-sm) auto;
     padding: 0;
     list-style: none;
     flex: 1;
 }
 
 .back-content .project-tech-stack li {
-    background: var(--primary-gradient);
-    color: var(--text-light);
-    padding: 0.4rem;
-    margin: 0.4rem 0;
-    border-radius: 0.25rem;
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+    border-radius: var(--border-radius-sm);
     text-align: center;
 }
 
 .back-content .project-btn {
     width: 80%;
-    margin: 0.5rem auto;
+    margin: var(--spacing-sm) auto;
 }
 
 .back-content .project-btn a {
-    background: var(--primary-gradient);
-    color: var(--text-light);
+    background: var(--gradient-primary);
+    color: var(--color-white);
     display: block;
     width: 100%;
-    padding: 0.4rem;
-    border-radius: 0.25rem;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
     text-decoration: none;
     text-align: center;
     transition: transform 0.3s ease;
 }
 
+/* Lista de tecnologías */
+.project-tech-stack {
+    margin: var(--spacing-md) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.project-tech-stack li {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+}
+
 /* Actualizando el estilo de las tarjetas escapables */
 .escapable-project .project-body {
-    background: var(--primary-gradient);
-    color: var(--text-light);
+    background: var(--gradient-primary);
+    color: var(--color-white);
     height: 100%;
-    border-radius: var(--border-radius);
-    padding: var(--card-padding);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -552,19 +598,19 @@ body {
 /* Botón de proyecto */
 .project-btn {
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: var(--spacing-md);
 }
 
 .project-btn a {
-    background: var(--primary-gradient);
-    color: var(--text-light);
-    width: 100%;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    text-align: center;
-    transition: transform 0.3s ease;
     display: block;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: center;
+    color: var(--color-white);
+    background: var(--gradient-accent);
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    transition: transform 0.3s ease;
 }
 
 .project-btn a:hover {
@@ -573,16 +619,14 @@ body {
 
 /* Media Queries */
 @media (max-width: 768px) {
-    :root {
-        --card-padding: 1rem;
-        --section-padding: 1.5rem;
-        --font-size-title: 2rem;
-    }
-
     .projects-container {
-        min-height: var(--content-height);
+        min-height: var(--content-min-height);
         margin-top: var(--navbar-height);
-        padding: var(--card-padding);
+        padding: var(--spacing-md);
+    }
+    
+    .fixed-project {
+        top: var(--spacing-md);
     }
     
     .project-card {
@@ -590,22 +634,21 @@ body {
     }
 
     .fixed-project {
-        top: var(--card-padding);
         left: 50%;
         transform: translateX(-50%);
     }
 
     .project-body {
-        padding: 1rem;
+        padding: var(--spacing-md);
     }
 
     .project-tech-stack li {
-        padding: 0.35rem 0.5rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
         font-size: 0.85rem;
     }
 
     .about-content {
-        padding: 1.5rem;
+        padding: var(--spacing-md);
     }
     
     .about-title {
@@ -617,10 +660,10 @@ body {
 .about-container {
     min-height: 100vh;
     position: relative;
-    background: linear-gradient(135deg, #6b48ff 0%, #48a9fe 100%);
-    color: white;
+    background: var(--gradient-background);
+    color: var(--color-white);
     overflow: hidden;
-    padding-top: 76px;
+    padding-top: var(--navbar-height);
 }
 
 .geometric-background {
@@ -643,7 +686,7 @@ body {
     z-index: 2;
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -652,7 +695,7 @@ body {
 .text-block {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    margin: 2rem auto;
+    margin: var(--spacing-xl) auto;
     padding: 2.5rem;
     position: relative;
     border-radius: 8px;
@@ -708,7 +751,7 @@ body {
 
 @media (max-width: 768px) {
     .content-sections {
-        padding: 1rem;
+        padding: var(--spacing-md);
     }
     
     .text-block {
@@ -729,11 +772,11 @@ body {
 }
 
 .project-flip-front .project-body {
-    background: var(--primary-gradient);
-    color: var(--text-light);
+    background: var(--gradient-primary);
+    color: var(--color-white);
     height: 100%;
-    border-radius: var(--border-radius);
-    padding: var(--card-padding);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -743,11 +786,11 @@ body {
 
 /* Ajustando la especificidad para la tarjeta fija */
 .fixed-project .project-item .project-body {
-    background: var(--primary-gradient);
-    color: var(--text-light);
+    background: var(--gradient-primary);
+    color: var(--color-white);
     height: 100%;
-    border-radius: var(--border-radius);
-    padding: var(--card-padding);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -768,12 +811,12 @@ body {
     align-items: center;
     justify-content: center;
     height: auto;
-    margin: 1rem;
+    margin: var(--spacing-md);
 }
 
 /* Corrigiendo el padding y margen de la parte trasera */
 .project-flip-back .project-body {
-    padding: var(--card-padding);
+    padding: var(--spacing-lg);
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -782,34 +825,11 @@ body {
 
 .project-flip-back .project-tech-stack {
     flex: 1;
-    margin: 1rem 0;
+    margin: var(--spacing-md) 0;
 }
 
 .project-flip-back .project-btn {
-    margin-top: 1rem;
+    margin-top: var(--spacing-md);
     margin-bottom: 0;
     padding: 0;
-}
-
-/* Mantener estilos específicos para la tarjeta fija */
-.fixed-project .project-flip-back .project-body {
-    background: white;
-    color: black;
-    height: 100%;
-    padding: var(--card-padding);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.fixed-project .project-flip-back .project-tech-stack {
-    width: 80%;
-    margin: 1rem auto;
-    flex: 1;
-}
-
-.fixed-project .project-flip-back .project-btn {
-    width: 80%;
-    margin: 1rem auto 0;
 }

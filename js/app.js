@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const fixedProject = document.querySelector('.fixed-project');
-    if (fixedProject) {
+    if (fixedProject) { 
         fixedProject.addEventListener('click', function() {
             const flipInner = this.querySelector('.project-flip-inner');
             flipInner.classList.toggle('flipped');
@@ -43,7 +43,7 @@ if (squares) {
 
 async function loadNavbar() {
     try {
-        const response = await fetch('components/navbar.html');
+        const response = await fetch('../components/navbar.html');
         const data = await response.text();
         document.getElementById('navbar-placeholder').innerHTML = data;
 
@@ -60,7 +60,7 @@ async function loadNavbar() {
 
 async function loadFooter() {
     try {
-        const response = await fetch('components/footer.html');
+        const response = await fetch('../components/footer.html');
         const data = await response.text();
         document.getElementById('footer-placeholder').innerHTML = data;
     } catch (error) {
@@ -224,17 +224,10 @@ function initializeProjects() {
     // Inicializar mensajes con texto fijo
     escapableCards.forEach(card => {
         card.querySelector('.card-text').textContent = "Proyecto en fase de diseño. No lo toques o pasarán cosas.";
-        card.dataset.hasHovered = "false";
-        
-        // Añadir evento touch/click para móvil
-        card.addEventListener('click', function() {
+        card.addEventListener('mouseover', function() {
             const nuevaPosicion = obtenerPosicionAleatoria(card);
             card.style.left = nuevaPosicion.x + 'px';
-            card.style.top = nuevaPosicion.y + 'px';
-            
-            if (card.dataset.hasHovered === "false") {
-                card.dataset.hasHovered = "true";
-            }
+            card.style.top = nuevaPosicion.y + 'px';     
             card.querySelector('.card-text').textContent = obtenerMensajeAleatorio();
         });
     });
