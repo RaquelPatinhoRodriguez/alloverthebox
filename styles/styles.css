@@ -31,12 +31,12 @@
     
     /* Alturas fijas */
     --navbar-height: 76px;
-    --footer-height: 80px;
+    --footer-height: 85px;
     --content-min-height: calc(100vh - (var(--navbar-height) + var(--footer-height)));
     
     /* Dimensiones */
     --project-card-width: 18rem;
-    --project-card-height: 21.6rem;
+    --project-card-height: 23rem; 
     --escapable-card-height: 12.6rem;
 }
 
@@ -59,7 +59,7 @@ body {
     position: relative;
     width: 100%;
     z-index: 10;
-    height: var(--footer-height); /* Aumentada la altura del footer */
+    height: var(--footer-height); 
     margin-top: auto; /* Empuja el footer al fondo */
     flex-shrink: 0;
     left: 0;
@@ -523,42 +523,8 @@ body {
     color: var(--color-black);
     font-size: 1.2rem;
     font-weight: bold;
-    margin: var(--spacing-sm) 0;
+    margin: 0 0 0.25rem 0; /* Reducido solo el margen inferior */
     text-align: center;
-}
-
-.back-content .project-tech-stack {
-    width: 80%;
-    margin: var(--spacing-sm) auto;
-    padding: 0;
-    list-style: none;
-    flex: 1;
-}
-
-.back-content .project-tech-stack li {
-    background: var(--gradient-primary);
-    color: var(--color-white);
-    padding: var(--spacing-sm);
-    margin: var(--spacing-sm) 0;
-    border-radius: var(--border-radius-sm);
-    text-align: center;
-}
-
-.back-content .project-btn {
-    width: 80%;
-    margin: var(--spacing-sm) auto;
-}
-
-.back-content .project-btn a {
-    background: var(--gradient-primary);
-    color: var(--color-white);
-    display: block;
-    width: 100%;
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-    text-decoration: none;
-    text-align: center;
-    transition: transform 0.3s ease;
 }
 
 /* Lista de tecnologías */
@@ -575,6 +541,7 @@ body {
     margin: var(--spacing-sm) 0;
     border-radius: var(--border-radius-sm);
     font-size: 0.9rem;
+    text-align: center;
 }
 
 /* Actualizando el estilo de las tarjetas escapables */
@@ -624,16 +591,13 @@ body {
         margin-top: var(--navbar-height);
         padding: var(--spacing-md);
     }
-    
+
     .fixed-project {
         top: var(--spacing-md);
     }
-    
+
     .project-card {
         width: 85vw;
-    }
-
-    .fixed-project {
         left: 50%;
         transform: translateX(-50%);
     }
@@ -753,7 +717,7 @@ body {
     .content-sections {
         padding: var(--spacing-md);
     }
-    
+
     .text-block {
         padding: 1.5rem;
         margin: 1.5rem auto;
@@ -804,14 +768,35 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .project-flip-front .project-body {
+    height: 100%;           
+    margin: 0;             /* Quitado el margen */
     display: flex;
     align-items: center;
     justify-content: center;
-    height: auto;
-    margin: var(--spacing-md);
+    font-size: 1.2rem;
+    padding: var(--spacing-xl);
+}
+
+/* Corrigiendo el centrado de la parte delantera */
+.project-flip-front .project-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-flip-front .project-body {
+    height: 100%;           /* Cambiado de 'auto' a '100%' */
+    margin: 0;             /* Quitado el margen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: var(--spacing-xl); /* Aumentado el padding */
 }
 
 /* Corrigiendo el padding y margen de la parte trasera */
@@ -821,6 +806,18 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+}
+
+.project-flip-back .project-tech-stack {
+    flex: 1;
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+.project-flip-back .project-btn {
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    padding: 0;
 }
 
 .project-flip-back .project-tech-stack {

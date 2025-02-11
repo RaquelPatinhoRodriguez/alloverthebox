@@ -257,13 +257,4 @@ function initFloatingShapes() {
     }
 }
 
-if (window.location.pathname.includes('about-box.html')) {
-    AOS.init({
-        duration: 1000,
-        easing: 'ease-out',
-        once: true
-    });
-    initFloatingShapes();
-}
 
-// Inicialización
