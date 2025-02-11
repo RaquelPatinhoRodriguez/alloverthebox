@@ -1,7 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     loadNavbar();
     loadFooter();
-    AOS.init();
+    
+    // Inicializar AOS si estamos en about-box.html
+    if (window.location.pathname.includes('about-box.html')) {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: false,
+            offset: 100
+        });
+    }
+    
+    // Inicializar proyectos si estamos en la página de proyectos
+    if (window.location.pathname.includes('projects.html')) {
+        initializeProjects();
+    }
+
+    const fixedProject = document.querySelector('.fixed-project');
+    if (fixedProject) {
+        fixedProject.addEventListener('click', function() {
+            const flipInner = this.querySelector('.project-flip-inner');
+            flipInner.classList.toggle('flipped');
+        });
+    }
 });
 
 const squares = document.getElementById('squares');
@@ -101,3 +123,154 @@ if (window.location.pathname.includes('about-me.html')) {
         document.body.classList.add(savedTheme);
     }
 }
+
+// Mensajes para las tarjetas escapables
+const mensajesEscape = [
+    "¡En desarrollo!",
+    "No me atraparás",
+    "404: No encontrado",
+    "Café primero...",
+    "Bug en proceso",
+    "Compila y corre",
+    "¡Deploy fallido!",
+    "git push --force"
+];
+
+// Selección de elementos
+const escapableCards = document.querySelectorAll('.escapable-project');
+const fixedProject = document.querySelector('.fixed-project');
+
+// Funciones
+function obtenerMensajeAleatorio() {
+    return mensajesEscape[Math.floor(Math.random() * mensajesEscape.length)];
+}
+
+function posicionarCards() {
+    const isMobile = window.innerWidth <= 768;
+    const baseSpacing = 40;
+    
+    escapableCards.forEach((card, index) => {
+        if (isMobile) {
+            const y = fixedProject.offsetHeight + (index + 1) * baseSpacing + index * card.offsetHeight;
+            card.style.left = '50%';
+            card.style.transform = 'translateX(-50%)';
+            card.style.top = y + 'px';
+        } else {
+            const fixedProjectWidth = fixedProject.offsetWidth;
+            const x = fixedProjectWidth + baseSpacing + (index * (card.offsetWidth + baseSpacing));
+            const minSpacing = fixedProjectWidth + baseSpacing;
+            card.style.left = Math.max(x, minSpacing) + 'px';
+            card.style.top = '100px';
+            card.style.transform = '';
+        }
+    });
+}
+
+function obtenerPosicionAleatoria(elemento) {
+    const fixedProjectRect = fixedProject.getBoundingClientRect();
+    const isMobile = window.innerWidth <= 768;
+    
+    const minY = 20;
+    const maxY = window.innerHeight - elemento.offsetHeight - 20;
+    const maxX = window.innerWidth - elemento.offsetWidth - 20;
+    
+    let intentos = 0;
+    let posicion;
+    
+    do {
+        if (isMobile) {
+            posicion = {
+                x: window.innerWidth / 2 - elemento.offsetWidth / 2,
+                y: Math.random() * (maxY - minY) + minY
+            };
+        } else {
+            posicion = {
+                x: Math.random() * maxX + 20,
+                y: Math.random() * (maxY - minY) + minY
+            };
+        }
+        
+        const rectPropuesto = {
+            left: posicion.x,
+            right: posicion.x + elemento.offsetWidth,
+            top: posicion.y,
+            bottom: posicion.y + elemento.offsetHeight
+        };
+        
+        if (!hayColision(rectPropuesto, fixedProjectRect)) {
+            return posicion;
+        }
+        
+        intentos++;
+    } while (intentos < 10);
+    
+    return {
+        x: isMobile ? window.innerWidth / 2 - elemento.offsetWidth / 2 : maxX,
+        y: (maxY + minY) / 2
+    };
+}
+
+function hayColision(rect1, rect2) {
+    return !(rect1.right < rect2.left || 
+            rect1.left > rect2.right || 
+            rect1.bottom < rect2.top || 
+            rect1.top > rect2.bottom);
+}
+
+function initializeProjects() {
+    // Inicializar posición de tarjetas
+    posicionarCards();
+    
+    // Inicializar mensajes con texto fijo
+    escapableCards.forEach(card => {
+        card.querySelector('.card-text').textContent = "Proyecto en fase de diseño. No lo toques o pasarán cosas.";
+        card.dataset.hasHovered = "false";
+        
+        // Añadir evento touch/click para móvil
+        card.addEventListener('click', function() {
+            const nuevaPosicion = obtenerPosicionAleatoria(card);
+            card.style.left = nuevaPosicion.x + 'px';
+            card.style.top = nuevaPosicion.y + 'px';
+            
+            if (card.dataset.hasHovered === "false") {
+                card.dataset.hasHovered = "true";
+            }
+            card.querySelector('.card-text').textContent = obtenerMensajeAleatorio();
+        });
+    });
+
+    // Añadir listener para reposicionar en resize
+    window.addEventListener('resize', posicionarCards);
+}
+
+function initFloatingShapes() {
+    const container = document.querySelector('.floating-shapes');
+    if (!container) return;
+
+    for (let i = 0; i < 20; i++) {
+        const shape = document.createElement('div');
+        shape.className = 'floating-shape';
+        shape.style.cssText = `
+            position: absolute;
+            width: ${Math.random() * 20 + 10}px;
+            height: ${Math.random() * 20 + 10}px;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(${Math.random() * 360}deg);
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: float ${Math.random() * 4 + 3}s infinite alternate;
+        `;
+        container.appendChild(shape);
+    }
+}
+
+if (window.location.pathname.includes('about-box.html')) {
+    AOS.init({
+        duration: 1000,
+        easing: 'ease-out',
+        once: true
+    });
+    initFloatingShapes();
+}
+
+// Inicialización
